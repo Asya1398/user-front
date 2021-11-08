@@ -53,7 +53,7 @@ const LogIn = () => {
                     gutterBottom
                     sx={{ mt: 3 }}
                 >
-                    Create a new Account
+                   LogIn your account
                 </Typography>
                 <form
                     noValidate

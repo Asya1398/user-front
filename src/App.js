@@ -8,7 +8,6 @@ import { routes } from './routers/routes';
 import MenuNav from './components/MenuNav';
 
 function App() {
-
     return (
         <div className="App">
             <MenuNav/>
