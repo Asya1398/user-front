@@ -1,23 +1,30 @@
 import './App.css';
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import { routes} from "./routers/routes";
-
+import {
+    BrowserRouter ,
+    Routes,
+    Route
+} from 'react-router-dom';
+import { routes } from './routers/routes';
+import MenuNav from './components/MenuNav';
 
 function App() {
-  return (
-      <div className="App">
-        <Router>
-          <Routes>
-            {routes.map(props => {
-                console.log('props', props);
-                return (
-                    <Route key={props.id} {...props} />
-                )
-            })}
-          </Routes>
-        </Router>
-      </div>
-  );
+
+    return (
+        <div className="App">
+            <MenuNav/>
+            <BrowserRouter>
+                <Routes>
+                    {routes.map(route => (
+                        <Route
+                            key={route.id}
+                            path={route.path}
+                            element={route.element}
+                        />
+                    ))}
+                </Routes>
+            </BrowserRouter>
+        </div>
+    );
 }
 
 export default App;

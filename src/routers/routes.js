@@ -1,27 +1,24 @@
 import Home from "../components/Home";
 import LogIn from "../components/LogIn";
-import Registration from "../components/Registration";
+import Register from "../components/Register";
 
-
-export default [
+export const routes= [
     {
         id: 1,
         path: '/',
         exact: true,
-        component: Home
+        element: <Home/>
     },
     {
         id: 2,
         path: '/login',
         exact: true,
-        component: LogIn
+        element: <LogIn/>
     },
     {
         id: 3,
-        path: '/registration',
+        path: '/register',
         exact: true,
-        component: Registration
+        element: <Register/>
     },
 ]
-
-
