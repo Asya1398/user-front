@@ -6,12 +6,15 @@ import TextField from '@mui/material/TextField';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
+
 const SignupSchema = Yup.object().shape({
     firstName: Yup.string()
+        .matches(/^[a-zA-Z]+$/, 'Must be only letters')
         .min(2, 'Too Short!')
         .max(50, 'Too Long!')
         .required('Required'),
     lastName: Yup.string()
+        .matches(/^[a-zA-Z]+$/, 'Must be only letters')
         .min(2, 'Too Short!')
         .max(50, 'Too Long!')
         .required('Required'),
@@ -53,6 +56,9 @@ const Register = () => {
         validationSchema: SignupSchema,
         onSubmit: values => {
             // TODO: implement save functional
+            console.log(values)
+            // window.location.href="/register"
+
         },
     });
     return (
@@ -125,6 +131,7 @@ const Register = () => {
                         type='Submit'
                         color='secondary'
                         variant='contained'
+                        // href=''
                     >
                         Register
                     </Button>
