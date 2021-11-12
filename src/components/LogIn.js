@@ -43,9 +43,7 @@ const LogIn = () => {
     },
     validationSchema: SigninSchema,
     onSubmit: (values) => {
-      console.log('values', values);
       dispatch(loginRequest(values));
-      // TODO: implement save functional
     },
   });
 

@@ -6,7 +6,6 @@ const URL = `${config.API_URL}/auth`;
 
 function* login({ payload }) {
   try {
-    console.log('payload', payload);
     const response = yield call(() =>
       axiosApiInstance.post(`${URL}/login`, payload)
     );
