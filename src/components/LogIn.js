@@ -5,6 +5,8 @@ import { makeStyles } from '@mui/styles';
 import TextField from '@mui/material/TextField';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { loginRequest } from '../redux/auth';
 
 const SigninSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -31,6 +33,7 @@ const useStyle = makeStyles({
 });
 
 const LogIn = () => {
+  const dispatch = useDispatch();
   const classes = useStyle();
 
   const formik = useFormik({
@@ -40,9 +43,12 @@ const LogIn = () => {
     },
     validationSchema: SigninSchema,
     onSubmit: (values) => {
+      console.log('values', values);
+      dispatch(loginRequest(values));
       // TODO: implement save functional
     },
   });
+
   return (
     <Container>
       <Typography
