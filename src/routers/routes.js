@@ -9,12 +9,15 @@ export const routes = [
     id: 1,
     path: '/',
     exact: true,
+    isLogin: true,
     element: <Home />,
   },
   {
     id: 2,
     path: '/login',
     exact: true,
+
+    isLogin: false,
     element: <LogIn />,
   },
   {

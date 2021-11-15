@@ -4,6 +4,7 @@ import { loginRequest, loginSuccess, loginFailure } from './actions';
 const initialState = {
   isLoginSuccess: false,
   authUser: {},
+  errorMessages: [],
 };
 
 const reducer = handleActions(
@@ -11,6 +12,7 @@ const reducer = handleActions(
     [loginRequest]: (state) => ({
       ...state,
       isLoginSuccess: false,
+      errorMessages: [],
     }),
     [loginSuccess]: (state, { payload }) => ({
       ...state,
