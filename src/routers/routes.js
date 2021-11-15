@@ -2,19 +2,22 @@ import Home from '../components/Home';
 import LogIn from '../components/LogIn';
 import Register from '../components/Register';
 import UserPage from '../components/UserPage';
-import CreateProduct from '../components/CreateProduct';
+import CreatePost from '../components/CreatePost';
 
 export const routes = [
   {
     id: 1,
     path: '/',
     exact: true,
+    isLogin: true,
     element: <Home />,
   },
   {
     id: 2,
     path: '/login',
     exact: true,
+
+    isLogin: false,
     element: <LogIn />,
   },
   {
@@ -33,6 +36,6 @@ export const routes = [
     id: 5,
     path: '/create',
     exact: true,
-    element: <CreateProduct />,
+    element: <CreatePost />,
   },
 ];
