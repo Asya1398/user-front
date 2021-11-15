@@ -2,9 +2,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import { createStyles, makeStyles } from '@mui/styles';
-// import { useNavigate } from 'react-router-dom';
 
-// const navigate = useNavigate();
 const useStyles = makeStyles(() =>
   createStyles({
     root: {
@@ -14,73 +12,74 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const MenuNav = () => {
+const MenuNav = ({ history }) => {
   const classes = useStyles();
-  // const location = window.location.pathname;
-  // return (
-  //   <AppBar position="static">
-  //     <Toolbar className={classes.root}>
-  //       <div>
-  //         <Button
-  //           onClick={() => {
-  //             // navigate('/home');
-  //           }}
-  //           color="inherit"
-  //         >
-  //           My Page
-  //         </Button>
-  //         <Button
-  //           onClick={() => {
-  //             // navigate('/create');
-  //           }}
-  //           color="inherit"
-  //         >
-  //           Create
-  //         </Button>
-  //       </div>
-  //       <Button
-  //         onClick={() => {
-  //           // navigate('/');
-  //         }}
-  //         color="inherit"
-  //       >
-  //         Log Out
-  //       </Button>
-  //     </Toolbar>
-  //   </AppBar>
-  // );
-  //
-  return (
-    <AppBar position="static">
-      <Toolbar className={classes.root}>
-        <Button
-          onClick={() => {
-            // navigate('/');
-          }}
-          color="inherit"
-        >
-          Home
-        </Button>
-        <div>
+  if (!localStorage.getItem('accessToken')) {
+    return (
+      <AppBar position="static">
+        <Toolbar className={classes.root}>
+          <Button
+            color="inherit"
+            onClick={() => {
+              history.push('/');
+            }}
+          >
+            Home
+          </Button>
+          <div>
+            <Button
+              color="inherit"
+              onClick={() => {
+                history.push('/login');
+              }}
+            >
+              Login
+            </Button>
+            <Button
+              color="inherit"
+              onClick={() => {
+                history.push('/register');
+              }}
+            >
+              register
+            </Button>
+          </div>
+        </Toolbar>
+      </AppBar>
+    );
+  } else {
+    return (
+      <AppBar position="static">
+        <Toolbar className={classes.root}>
+          <div>
+            <Button
+              onClick={() => {
+                history.push('/posts');
+              }}
+              color="inherit"
+            >
+              My Page
+            </Button>
+            <Button
+              onClick={() => {
+                history.push('/posts/manage');
+              }}
+              color="inherit"
+            >
+              Create
+            </Button>
+          </div>
           <Button
             onClick={() => {
-              // navigate('/login');
+              history.push('/logout');
             }}
             color="inherit"
           >
-            Login
+            Log Out
           </Button>
-          <Button
-            onClick={() => {
-              // navigate('/register');
-            }}
-            color="inherit"
-          >
-            register
-          </Button>
-        </div>
-      </Toolbar>
-    </AppBar>
-  );
+        </Toolbar>
+      </AppBar>
+    );
+  }
 };
 export default MenuNav;

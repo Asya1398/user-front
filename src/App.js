@@ -4,17 +4,31 @@ import { routes } from './routers/routes';
 import MenuNav from './components/MenuNav';
 import { createBrowserHistory } from 'history';
 
-//login exac user-i stugum
 const history = createBrowserHistory();
+
 function App() {
+  const logged = routes.filter((r) => r.isLogin === true);
+  const logout = routes.filter((r) => r.isLogin === false);
   return (
     <div className="App">
-      <MenuNav />
-      <BrowserRouter history={history}>
+      <MenuNav history={history} />
+      <BrowserRouter>
         <Routes>
-          {routes.map((route) => (
-            <Route key={route.id} path={route.path} element={route.element} />
-          ))}
+          {localStorage.getItem('accessToken')
+            ? logged.map((route) => (
+                <Route
+                  key={route.id}
+                  path={route.path}
+                  element={route.element}
+                />
+              ))
+            : logout.map((route) => (
+                <Route
+                  key={route.id}
+                  path={route.path}
+                  element={route.element}
+                />
+              ))}
         </Routes>
       </BrowserRouter>
     </div>

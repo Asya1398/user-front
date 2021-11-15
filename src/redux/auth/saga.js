@@ -10,7 +10,8 @@ function* login({ payload }) {
       axiosApiInstance.post(`${URL}/login`, payload)
     );
     if (response?.status === 200) {
-      yield put(loginSuccess(response.data));
+      localStorage.setItem('accessToken', response.data.token);
+      yield put(loginSuccess(response.data.user));
     }
   } catch (e) {
     if (e?.response?.data) {
