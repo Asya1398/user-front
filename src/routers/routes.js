@@ -2,7 +2,7 @@ import Home from '../components/Home';
 import LogIn from '../components/LogIn';
 import Register from '../components/Register';
 import UserPage from '../components/UserPage';
-import CreateProduct from '../components/CreateProduct';
+import CreatePost from '../components/CreatePost';
 
 export const routes = [
   {
@@ -36,6 +36,6 @@ export const routes = [
     id: 5,
     path: '/create',
     exact: true,
-    element: <CreateProduct />,
+    element: <CreatePost />,
   },
 ];
