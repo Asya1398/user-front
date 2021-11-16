@@ -19,7 +19,7 @@ const MenuNav = ({ history }) => {
     <AppBar position="static">
       <Toolbar className={classes.root}>
         {!localStorage.getItem('accessToken') ? (
-          <div>
+          <>
             <Button
               color="inherit"
               onClick={() => {
@@ -46,9 +46,9 @@ const MenuNav = ({ history }) => {
                 register
               </Button>
             </div>
-          </div>
+          </>
         ) : (
-          <div>
+          <>
             <div>
               <Button
                 onClick={() => {
@@ -75,7 +75,7 @@ const MenuNav = ({ history }) => {
             >
               Log Out
             </Button>
-          </div>
+          </>
         )}
       </Toolbar>
     </AppBar>
