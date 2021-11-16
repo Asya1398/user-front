@@ -40,11 +40,4 @@ export const routes = [
     isLogin: true,
     element: <ManagePost />,
   },
-  {
-    id: 6,
-    path: '/logout',
-    exact: true,
-    isLogin: true,
-    element: <Home />,
-  },
 ];

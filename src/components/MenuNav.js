@@ -13,6 +13,7 @@ const useStyles = makeStyles(() =>
 );
 
 const MenuNav = ({ history }) => {
+  console.log('history', history);
   const classes = useStyles();
   if (!localStorage.getItem('accessToken')) {
     return (
@@ -71,7 +72,7 @@ const MenuNav = ({ history }) => {
           </div>
           <Button
             onClick={() => {
-              history.push('/logout');
+              // TODO: logout
             }}
             color="inherit"
           >
