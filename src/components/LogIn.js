@@ -93,7 +93,7 @@ const LogIn = () => {
           <div>{formik.errors.password}</div>
         ) : null}
         <Button type="Submit" color="secondary" variant="contained">
-          Register
+          LogIn
         </Button>
       </form>
     </Container>

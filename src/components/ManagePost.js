@@ -33,7 +33,7 @@ const useStyle = makeStyles({
   },
 });
 
-const CreatePost = () => {
+const ManagePost = () => {
   const classes = useStyle();
 
   const formik = useFormik({
@@ -101,4 +101,4 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost;
+export default ManagePost;
