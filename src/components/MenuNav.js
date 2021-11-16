@@ -13,74 +13,72 @@ const useStyles = makeStyles(() =>
 );
 
 const MenuNav = ({ history }) => {
-  console.log('history', history);
   const classes = useStyles();
-  if (!localStorage.getItem('accessToken')) {
-    return (
-      <AppBar position="static">
-        <Toolbar className={classes.root}>
-          <Button
-            color="inherit"
-            onClick={() => {
-              history.push('/');
-            }}
-          >
-            Home
-          </Button>
-          <div>
+
+  return (
+    <AppBar position="static">
+      <Toolbar className={classes.root}>
+        {!localStorage.getItem('accessToken') ? (
+          <>
             <Button
               color="inherit"
               onClick={() => {
-                history.push('/login');
+                history.push('/');
               }}
             >
-              Login
+              Home
             </Button>
+            <div>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  history.push('/login');
+                }}
+              >
+                Login
+              </Button>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  history.push('/register');
+                }}
+              >
+                register
+              </Button>
+            </div>
+          </>
+        ) : (
+          <>
+            <div>
+              <Button
+                onClick={() => {
+                  history.push('/posts');
+                }}
+                color="inherit"
+              >
+                My Page
+              </Button>
+              <Button
+                onClick={() => {
+                  history.push('/posts/manage');
+                }}
+                color="inherit"
+              >
+                Create
+              </Button>
+            </div>
             <Button
-              color="inherit"
               onClick={() => {
-                history.push('/register');
-              }}
-            >
-              register
-            </Button>
-          </div>
-        </Toolbar>
-      </AppBar>
-    );
-  } else {
-    return (
-      <AppBar position="static">
-        <Toolbar className={classes.root}>
-          <div>
-            <Button
-              onClick={() => {
-                history.push('/posts');
+                // TODO: logout
               }}
               color="inherit"
             >
-              My Page
+              Log Out
             </Button>
-            <Button
-              onClick={() => {
-                history.push('/posts/manage');
-              }}
-              color="inherit"
-            >
-              Create
-            </Button>
-          </div>
-          <Button
-            onClick={() => {
-              // TODO: logout
-            }}
-            color="inherit"
-          >
-            Log Out
-          </Button>
-        </Toolbar>
-      </AppBar>
-    );
-  }
+          </>
+        )}
+      </Toolbar>
+    </AppBar>
+  );
 };
 export default MenuNav;
