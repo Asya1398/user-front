@@ -69,7 +69,7 @@ const MenuNav = ({ history }) => {
             </div>
             <Button
               onClick={() => {
-                // TODO: logout
+                // TODO: logout f
               }}
               color="inherit"
             >
