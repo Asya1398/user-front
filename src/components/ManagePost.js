@@ -5,14 +5,15 @@ import { makeStyles } from '@mui/styles';
 import TextField from '@mui/material/TextField';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
-import { loginRequest } from '../redux/auth';
 
-const SigninSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('Required'),
-  password: Yup.string()
+const SignInSchema = Yup.object().shape({
+  title: Yup.string()
     .min(2, 'Too Short!')
     .max(50, 'Too Long!')
+    .required('Required'),
+  description: Yup.string()
+    .min(10, 'Too Short!')
+    .max(100, 'Too Long!')
     .required('Required'),
 });
 
@@ -32,21 +33,19 @@ const useStyle = makeStyles({
   },
 });
 
-const LogIn = () => {
-  const dispatch = useDispatch();
+const ManagePost = () => {
   const classes = useStyle();
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      title: '',
+      description: '',
     },
-    validationSchema: SigninSchema,
+    validationSchema: SignInSchema,
     onSubmit: (values) => {
-      dispatch(loginRequest(values));
+      // TODO: implement save functional
     },
   });
-
   return (
     <Container>
       <Typography
@@ -56,7 +55,7 @@ const LogIn = () => {
         gutterBottom
         sx={{ mt: 3 }}
       >
-        LogIn your account
+        Create Product
       </Typography>
       <form
         noValidate
@@ -67,37 +66,39 @@ const LogIn = () => {
         <TextField
           onChange={formik.handleChange}
           className={classes.field}
-          name="email"
-          value={formik.values.email}
-          label="Email"
+          name="title"
+          value={formik.values.title}
+          label="Title"
           variant="outlined"
           color="secondary"
           fullWidth
           sx={{ m: 2 }}
         />
-        {formik.errors.email && formik.touched.email ? (
-          <div>{formik.errors.email}</div>
+        {formik.errors.title && formik.touched.title ? (
+          <div>{formik.errors.title}</div>
         ) : null}
         <TextField
           onChange={formik.handleChange}
           className={classes.field}
-          name="password"
+          name="description"
           value={formik.values.password}
-          label="Password"
+          label="Description"
           variant="outlined"
           color="secondary"
           fullWidth
           sx={{ m: 2 }}
+          multiline
+          rows={4}
         />
-        {formik.errors.password && formik.touched.password ? (
-          <div>{formik.errors.password}</div>
+        {formik.errors.description && formik.touched.description ? (
+          <div>{formik.errors.description}</div>
         ) : null}
         <Button type="Submit" color="secondary" variant="contained">
-          LogIn
+          Create
         </Button>
       </form>
     </Container>
   );
 };
 
-export default LogIn;
+export default ManagePost;
