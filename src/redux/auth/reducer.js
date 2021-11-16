@@ -1,5 +1,7 @@
 import { handleActions } from 'redux-actions';
 import { loginRequest, loginSuccess, loginFailure } from './actions';
+import { logoutRequest, logoutSuccess, logoutFailure } from './actions';
+import { registerRequest, registerSuccess, registerFailure } from './actions';
 
 const initialState = {
   isLoginSuccess: false,

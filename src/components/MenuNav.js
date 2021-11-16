@@ -70,6 +70,8 @@ const MenuNav = ({ history }) => {
             <Button
               onClick={() => {
                 // TODO: logout f
+                // window.localStorage.removeItem('accessToken');
+                history.push('/');
               }}
               color="inherit"
             >
