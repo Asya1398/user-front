@@ -5,8 +5,11 @@ import { makeStyles } from '@mui/styles';
 import TextField from '@mui/material/TextField';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginRequest } from '../redux/auth';
+import usePrevious from '../hooks/usePrevious';
+import { useEffect } from 'react';
+import { useHistory } from '../BrowserRouter';
 
 const SigninSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -30,11 +33,27 @@ const useStyle = makeStyles({
     marginBottom: 25,
     display: 'block',
   },
+  errorMsg: {
+    marginTop: 20,
+    color: 'red',
+  },
 });
-
 const LogIn = () => {
-  const dispatch = useDispatch();
   const classes = useStyle();
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const { isLoginSuccess, loginErrorMessages } = useSelector(
+    (store) => store.auth
+  );
+
+  const prevIsLoginSuccess = usePrevious(isLoginSuccess);
+
+  useEffect(() => {
+    if (isLoginSuccess && prevIsLoginSuccess === false) {
+      history.push('/posts');
+    }
+  }, [isLoginSuccess]);
 
   const formik = useFormik({
     initialValues: {
@@ -76,8 +95,9 @@ const LogIn = () => {
           sx={{ m: 2 }}
         />
         {formik.errors.email && formik.touched.email ? (
-          <div>{formik.errors.email}</div>
+          <div className={classes.errorMsg}>{formik.errors.email}</div>
         ) : null}
+        <div className={classes.errorMsg}>{loginErrorMessages.message} </div>
         <TextField
           onChange={formik.handleChange}
           className={classes.field}
@@ -88,9 +108,10 @@ const LogIn = () => {
           color="secondary"
           fullWidth
           sx={{ m: 2 }}
+          type="password"
         />
         {formik.errors.password && formik.touched.password ? (
-          <div>{formik.errors.password}</div>
+          <div className={classes.errorMsg}>{formik.errors.password}</div>
         ) : null}
         <Button type="Submit" color="secondary" variant="contained">
           LogIn
