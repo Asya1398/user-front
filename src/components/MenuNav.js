@@ -1,7 +1,9 @@
+import { useDispatch } from 'react-redux';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import { createStyles, makeStyles } from '@mui/styles';
+import { logoutRequest } from '../redux/auth';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -13,7 +15,12 @@ const useStyles = makeStyles(() =>
 );
 
 const MenuNav = ({ history }) => {
+  const dispatch = useDispatch();
   const classes = useStyles();
+
+  const logout = () => {
+    dispatch(logoutRequest());
+  };
 
   return (
     <AppBar position="static">
@@ -67,14 +74,7 @@ const MenuNav = ({ history }) => {
                 Create
               </Button>
             </div>
-            <Button
-              onClick={() => {
-                // TODO: logout f
-                // window.localStorage.removeItem('accessToken');
-                history.push('/');
-              }}
-              color="inherit"
-            >
+            <Button onClick={logout} color="inherit">
               Log Out
             </Button>
           </>
