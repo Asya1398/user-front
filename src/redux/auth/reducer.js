@@ -65,7 +65,7 @@ const reducer = handleActions(
       registerErrorMessages: [],
     }),
     [registerSuccess]: (state, { payload }) => {
-      window.location = '/posts';
+      window.location = '/login';
       return {
         ...state,
         isRegisterSuccess: true,
