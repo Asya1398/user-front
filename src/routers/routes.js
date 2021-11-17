@@ -1,8 +1,8 @@
 import Home from '../components/Home';
 import LogIn from '../components/LogIn';
 import Register from '../components/Register';
-import UserPage from '../components/UserPage';
 import ManagePost from '../components/ManagePost';
+import UserPosts from '../components/UserPosts';
 
 export const routes = [
   {
@@ -31,7 +31,7 @@ export const routes = [
     path: '/posts',
     exact: true,
     isLogin: true,
-    element: <UserPage />,
+    element: <UserPosts />,
   },
   {
     id: 5,
