@@ -1,24 +1,28 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { axiosApiInstance, config } from '../../configs';
-import { getPostRequest, getPostSuccess, getPostFailure } from './actions';
+import {
+  getUserPostsRequest,
+  getUserPostsSuccess,
+  getUserPostsFailure,
+} from './actions';
 
 const URL = `${config.API_URL}/post`;
 
-function* getPosts({ payload }) {
+function* getUserPosts() {
   try {
     const response = yield call(() =>
-      axiosApiInstance.post(`${URL}/posts`, payload)
+      axiosApiInstance.get(`${URL}/user-posts`)
     );
     if (response?.status === 200) {
-      yield put(getPostSuccess(response.data.post));
+      yield put(getUserPostsSuccess(response.data.posts));
     }
   } catch (e) {
     if (e?.response?.data) {
-      yield put(getPostFailure(e?.response?.data));
+      yield put(getUserPostsFailure(e?.response?.data));
     }
   }
 }
-
+const test = '';
 export default function* () {
-  yield takeLatest(getPostRequest, getPosts);
+  yield takeLatest(getUserPostsRequest, getUserPosts);
 }

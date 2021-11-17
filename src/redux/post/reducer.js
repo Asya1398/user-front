@@ -1,25 +1,29 @@
 import { handleActions } from 'redux-actions';
-import { getPostRequest, getPostSuccess, getPostFailure } from './actions';
+import {
+  getUserPostsRequest,
+  getUserPostsSuccess,
+  getUserPostsFailure,
+} from './actions';
 
 const initialState = {
   isGetPostSuccess: false,
-  getPost: [],
+  userPosts: [],
   getPostErrorMessages: [],
 };
 
 const reducer = handleActions(
   {
-    [getPostRequest]: (state) => ({
+    [getUserPostsRequest]: (state) => ({
       ...state,
       isGetPostSuccess: false,
       getPostErrorMessages: [],
     }),
-    [getPostSuccess]: (state, { payload }) => ({
+    [getUserPostsSuccess]: (state, { payload }) => ({
       ...state,
       isGetPostSuccess: true,
-      getPost: payload,
+      userPosts: payload,
     }),
-    [getPostFailure]: (state, { payload }) => ({
+    [getUserPostsFailure]: (state, { payload }) => ({
       ...state,
       isGetPostSuccess: false,
       getPostErrorMessages: payload,
@@ -27,4 +31,5 @@ const reducer = handleActions(
   },
   initialState
 );
+
 export default reducer;

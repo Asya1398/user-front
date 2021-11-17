@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
 
-export const getPostRequest = createAction('GET_POST_REQUEST');
-export const getPostSuccess = createAction('GET_POST_SUCCESS');
-export const getPostFailure = createAction('GET_POST_FAILURE');
+export const getUserPostsRequest = createAction('GET_USER_POSTS_REQUEST');
+export const getUserPostsSuccess = createAction('GET_USER_POSTS_SUCCESS');
+export const getUserPostsFailure = createAction('GET_USER_POSTS_FAILURE');

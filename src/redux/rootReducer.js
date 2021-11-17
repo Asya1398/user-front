@@ -8,4 +8,5 @@ const rootReducer = combineReducers({
   auth,
   post,
 });
+
 export default rootReducer;
