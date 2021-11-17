@@ -47,7 +47,6 @@ function* register({ payload }) {
       axiosApiInstance.post(`${URL}/register`, payload)
     );
     if (response?.status === 201) {
-      localStorage.setItem('accessToken', response.data.token);
       yield put(registerSuccess(response.data.user));
     }
   } catch (e) {

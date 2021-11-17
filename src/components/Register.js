@@ -59,7 +59,7 @@ const Register = () => {
   const prevIsRegisterSuccess = usePrevious(isRegisterSuccess);
   useEffect(() => {
     if (isRegisterSuccess && prevIsRegisterSuccess === false) {
-      history.push('/posts');
+      history.push('/login');
     }
   }, [isRegisterSuccess]);
 

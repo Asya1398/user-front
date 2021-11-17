@@ -28,11 +28,14 @@ const reducer = handleActions(
       isLoginSuccess: false,
       loginErrorMessages: [],
     }),
-    [loginSuccess]: (state, { payload }) => ({
-      ...state,
-      isLoginSuccess: true,
-      authUser: payload,
-    }),
+    [loginSuccess]: (state, { payload }) => {
+      window.location = '/posts';
+      return {
+        ...state,
+        isLoginSuccess: true,
+        authUser: payload,
+      };
+    },
     [loginFailure]: (state, { payload }) => ({
       ...state,
       isLoginSuccess: false,
@@ -62,7 +65,7 @@ const reducer = handleActions(
       registerErrorMessages: [],
     }),
     [registerSuccess]: (state, { payload }) => {
-      window.location = '/posts';
+      window.location = '/login';
       return {
         ...state,
         isRegisterSuccess: true,
