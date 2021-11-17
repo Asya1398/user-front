@@ -16,7 +16,9 @@ const initialState = {
   isLogoutSuccess: false,
   isRegisterSuccess: false,
   authUser: {},
-  errorMessages: [],
+  loginErrorMessages: [],
+  logoutErrorMessages: [],
+  registerErrorMessages: [],
 };
 
 const reducer = handleActions(
@@ -24,7 +26,7 @@ const reducer = handleActions(
     [loginRequest]: (state) => ({
       ...state,
       isLoginSuccess: false,
-      errorMessages: [],
+      loginErrorMessages: [],
     }),
     [loginSuccess]: (state, { payload }) => ({
       ...state,
@@ -34,16 +36,15 @@ const reducer = handleActions(
     [loginFailure]: (state, { payload }) => ({
       ...state,
       isLoginSuccess: false,
-      errorMessages: payload,
+      loginErrorMessages: payload,
     }),
     [logoutRequest]: (state) => ({
       ...state,
       isLogoutSuccess: false,
-      errorMessages: [],
+      logoutErrorMessages: [],
     }),
     [logoutSuccess]: (state) => {
       window.location = '/login';
-
       return {
         ...state,
         isLogoutSuccess: true,
@@ -53,22 +54,25 @@ const reducer = handleActions(
     [logoutFailure]: (state, { payload }) => ({
       ...state,
       isLogoutSuccess: false,
-      errorMessages: payload,
+      logoutErrorMessages: payload,
     }),
     [registerRequest]: (state) => ({
       ...state,
       isRegisterSuccess: false,
-      errorMessages: [],
+      registerErrorMessages: [],
     }),
-    [registerSuccess]: (state, { payload }) => ({
-      ...state,
-      isRegisterSuccess: true,
-      authUser: payload,
-    }),
+    [registerSuccess]: (state, { payload }) => {
+      window.location = '/posts';
+      return {
+        ...state,
+        isRegisterSuccess: true,
+        authUser: payload,
+      };
+    },
     [registerFailure]: (state, { payload }) => ({
       ...state,
       isRegisterSuccess: false,
-      errorMessages: payload,
+      registerErrorMessages: payload,
     }),
   },
   initialState

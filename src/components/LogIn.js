@@ -39,11 +39,13 @@ const useStyle = makeStyles({
   },
 });
 const LogIn = () => {
+  const classes = useStyle();
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const { isLoginSuccess, errorMessages } = useSelector((store) => store.auth);
-  const classes = useStyle();
+  const { isLoginSuccess, loginErrorMessages } = useSelector(
+    (store) => store.auth
+  );
 
   const prevIsLoginSuccess = usePrevious(isLoginSuccess);
 
@@ -93,8 +95,9 @@ const LogIn = () => {
           sx={{ m: 2 }}
         />
         {formik.errors.email && formik.touched.email ? (
-          <div>{formik.errors.email}</div>
+          <div className={classes.errorMsg}>{formik.errors.email}</div>
         ) : null}
+        <div className={classes.errorMsg}>{loginErrorMessages.message} </div>
         <TextField
           onChange={formik.handleChange}
           className={classes.field}
@@ -105,14 +108,14 @@ const LogIn = () => {
           color="secondary"
           fullWidth
           sx={{ m: 2 }}
+          type="password"
         />
         {formik.errors.password && formik.touched.password ? (
-          <div>{formik.errors.password}</div>
+          <div className={classes.errorMsg}>{formik.errors.password}</div>
         ) : null}
         <Button type="Submit" color="secondary" variant="contained">
           LogIn
         </Button>
-        <div className={classes.errorMsg}>{errorMessages.message} </div>
       </form>
     </Container>
   );

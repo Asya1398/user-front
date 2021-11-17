@@ -36,7 +36,8 @@
         "react/jsx-no-target-blank": 0,
         "no-inner-declarations": 0,
         "react/react-in-jsx-scope": 0,
-        "linebreak-style": 0
+        "linebreak-style": 0,
+        "no-debugger": "off"
     },
 
     "parser": "babel-eslint"
