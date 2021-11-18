@@ -1,8 +1,8 @@
-import Home from '../components/Home';
 import LogIn from '../components/LogIn';
 import Register from '../components/Register';
 import ManagePost from '../components/ManagePost';
 import UserPosts from '../components/UserPosts';
+import UsersAndPosts from '../components/UsersAndPosts';
 
 export const routes = [
   {
@@ -10,7 +10,7 @@ export const routes = [
     path: '/',
     exact: true,
     isLogin: false,
-    element: <Home />,
+    element: <UsersAndPosts />,
   },
   {
     id: 2,

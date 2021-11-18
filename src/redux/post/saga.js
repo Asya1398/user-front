@@ -4,6 +4,18 @@ import {
   getUserPostsRequest,
   getUserPostsSuccess,
   getUserPostsFailure,
+  getAllPostsRequest,
+  getAllPostsSuccess,
+  getAllPostsFailure,
+  getAllUsersRequest,
+  getAllUsersSuccess,
+  getAllUsersFailure,
+  createPostRequest,
+  createPostSuccess,
+  createPostFailure,
+  deletePostRequest,
+  deletePostSuccess,
+  deletePostFailure,
 } from './actions';
 
 const URL = `${config.API_URL}/post`;
@@ -22,7 +34,64 @@ function* getUserPosts() {
     }
   }
 }
+function* getAllPosts() {
+  try {
+    const response = yield call(() => axiosApiInstance.get(`${URL}/posts`));
+    if (response?.status === 200) {
+      yield put(getAllPostsSuccess(response.data.posts));
+    }
+  } catch (e) {
+    if (e?.response?.data) {
+      yield put(getAllPostsFailure(e?.response?.data));
+    }
+  }
+}
+function* getAllUsers() {
+  try {
+    const response = yield call(() => axiosApiInstance.get(`${URL}/users`));
+    if (response?.status === 200) {
+      yield put(getAllUsersSuccess(response.data.users));
+    }
+  } catch (e) {
+    if (e?.response?.data) {
+      yield put(getAllUsersFailure(e?.response?.data));
+    }
+  }
+}
+function* createPost({ payload }) {
+  try {
+    const response = yield call(() =>
+      axiosApiInstance.post(`${URL}/create`, payload)
+    );
+    if (response?.status === 200) {
+      yield put(createPostSuccess(response.data.post));
+    }
+  } catch (e) {
+    if (e?.response?.data) {
+      yield put(createPostFailure(e?.response?.data));
+    }
+  }
+}
+function* deletePost({ payload }) {
+  try {
+    console.log('payload' + payload);
+    const response = yield call(() =>
+      axiosApiInstance.delete(`${URL}/delete/${payload.id}`)
+    );
+    if (response?.status === 200) {
+      yield put(deletePostSuccess(response.data.post));
+    }
+  } catch (e) {
+    if (e?.response?.data) {
+      yield put(deletePostFailure(e?.response?.data));
+    }
+  }
+}
 const test = '';
 export default function* () {
   yield takeLatest(getUserPostsRequest, getUserPosts);
+  yield takeLatest(getAllUsersRequest, getAllUsers);
+  yield takeLatest(getAllPostsRequest, getAllPosts);
+  yield takeLatest(createPostRequest, createPost);
+  yield takeLatest(deletePostRequest, deletePost);
 }
