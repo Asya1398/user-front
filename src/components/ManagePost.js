@@ -5,6 +5,11 @@ import { makeStyles } from '@mui/styles';
 import TextField from '@mui/material/TextField';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useHistory } from '../BrowserRouter';
+import { useDispatch, useSelector } from 'react-redux';
+import usePrevious from '../hooks/usePrevious';
+import { useEffect } from 'react';
+import { createPostRequest } from '../redux/post';
 
 const SignInSchema = Yup.object().shape({
   title: Yup.string()
@@ -13,7 +18,7 @@ const SignInSchema = Yup.object().shape({
     .required('Required'),
   description: Yup.string()
     .min(10, 'Too Short!')
-    .max(100, 'Too Long!')
+    .max(200, 'Too Long!')
     .required('Required'),
 });
 
@@ -35,7 +40,17 @@ const useStyle = makeStyles({
 
 const ManagePost = () => {
   const classes = useStyle();
-
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { isCreatePostSuccess, createPostErrorMessages } = useSelector(
+    (store) => store.post
+  );
+  const prevIsRegisterSuccess = usePrevious(isCreatePostSuccess);
+  useEffect(() => {
+    if (isCreatePostSuccess && prevIsRegisterSuccess === false) {
+      history.push('/posts');
+    }
+  }, [isCreatePostSuccess]);
   const formik = useFormik({
     initialValues: {
       title: '',
@@ -43,7 +58,7 @@ const ManagePost = () => {
     },
     validationSchema: SignInSchema,
     onSubmit: (values) => {
-      // TODO: implement save functional
+      dispatch(createPostRequest(values));
     },
   });
   return (
