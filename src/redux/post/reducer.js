@@ -111,6 +111,7 @@ const reducer = handleActions(
       deletePostErrorMessages: [],
     }),
     [deletePostSuccess]: (state, { payload }) => {
+      window.location = '/posts';
       return {
         ...state.userPosts.map((post) => {
           console.log(post);
