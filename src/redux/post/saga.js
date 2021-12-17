@@ -74,9 +74,8 @@ function* createPost({ payload }) {
 }
 function* deletePost({ payload }) {
   try {
-    console.log('payload' + payload);
     const response = yield call(() =>
-      axiosApiInstance.delete(`${URL}/delete/${payload.id}`)
+      axiosApiInstance.delete(`${URL}/delete/${payload}`)
     );
     if (response?.status === 200) {
       yield put(deletePostSuccess(response.data.post));
