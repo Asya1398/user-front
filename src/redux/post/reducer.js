@@ -112,12 +112,14 @@ const reducer = handleActions(
     }),
     [deletePostSuccess]: (state, { payload }) => {
       return {
-        // TODO:return filter
-        // ...state.map((post)=>{
-        //
-        // })
-        // isDeletePostSuccess: true,
-        // deletePost: payload,
+        ...state.userPosts.map((post) => {
+          console.log(post);
+          if (post.id !== payload) {
+            return post;
+          }
+        }),
+        isDeletePostSuccess: true,
+        deletePost: payload,
       };
     },
     [deletePostFailure]: (state, { payload }) => ({

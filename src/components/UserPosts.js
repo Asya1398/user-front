@@ -36,7 +36,7 @@ const UserPosts = () => {
   return (
     <Container className={classes.root}>
       <Grid container spacing={3}>
-        {userPosts ? (
+        {userPosts &&
           userPosts.map((post) => {
             return (
               <Grid item xs={12} md={6} lg={4} key={post.id}>
@@ -67,10 +67,7 @@ const UserPosts = () => {
                 </Card>
               </Grid>
             );
-          })
-        ) : (
-          <div>{getPostErrorMessages.message}</div>
-        )}
+          })}
       </Grid>
     </Container>
   );
