@@ -12,6 +12,9 @@ import {
   deletePostRequest,
   deletePostSuccess,
   deletePostFailure,
+  getPostRequest,
+  getPostSuccess,
+  getPostFailure,
   getAllUsersRequest,
   getAllUsersSuccess,
   getAllUsersFailure,
@@ -23,16 +26,19 @@ const initialState = {
   isGetAllUsersSuccess: false,
   isCreatePostSuccess: false,
   isDeletePostSuccess: false,
+  isGetThePostSuccess: false,
   userPosts: [],
   allPosts: [],
   allUsers: [],
   createPost: {},
   deletePost: [],
+  getPost: {},
   getPostErrorMessages: [],
   getAllPostsErrorMessages: [],
   getAllUsersErrorMessages: [],
   createPostErrorMessages: [],
   deletePostErrorMessages: [],
+  getThePostErrorMessages: [],
 };
 
 const reducer = handleActions(
@@ -127,6 +133,21 @@ const reducer = handleActions(
       ...state,
       isDeletePostSuccess: false,
       deletePostErrorMessages: payload,
+    }),
+    //Update user post
+    [getPostRequest]: (state) => ({
+      ...state,
+      isGetThePostSuccess: false,
+      getThePostErrorMessages: [],
+    }),
+    [getPostSuccess]: (state, { payload }) => ({
+      ...state,
+      getPost: payload,
+    }),
+    [getPostFailure]: (state, { payload }) => ({
+      ...state,
+      isGetThePostSuccess: false,
+      getThePostErrorMessages: payload,
     }),
   },
   initialState

@@ -16,6 +16,9 @@ import {
   deletePostRequest,
   deletePostSuccess,
   deletePostFailure,
+  getPostRequest,
+  getPostSuccess,
+  getPostFailure,
 } from './actions';
 
 const URL = `${config.API_URL}/post`;
@@ -86,11 +89,26 @@ function* deletePost({ payload }) {
     }
   }
 }
-const test = '';
+function* getPost({ payload }) {
+  try {
+    const response = yield call(() =>
+      axiosApiInstance.get(`${URL}/${payload}`)
+    );
+    if (response?.status === 200) {
+      yield put(getPostSuccess(response.data.post));
+    }
+  } catch (e) {
+    if (e?.response?.data) {
+      yield put(getPostFailure(e?.response?.data));
+    }
+  }
+}
+
 export default function* () {
   yield takeLatest(getUserPostsRequest, getUserPosts);
   yield takeLatest(getAllUsersRequest, getAllUsers);
   yield takeLatest(getAllPostsRequest, getAllPosts);
   yield takeLatest(createPostRequest, createPost);
   yield takeLatest(deletePostRequest, deletePost);
+  yield takeLatest(getPostRequest, getPost);
 }
