@@ -3,6 +3,7 @@ import Register from '../components/Register';
 import ManagePost from '../components/ManagePost';
 import UserPosts from '../components/UserPosts';
 import UsersAndPosts from '../components/UsersAndPosts';
+import UpdatePost from '../components/UpdatePost';
 
 export const routes = [
   {
@@ -39,5 +40,12 @@ export const routes = [
     exact: true,
     isLogin: true,
     element: <ManagePost />,
+  },
+  {
+    id: 6,
+    path: '/update/:id',
+    exact: true,
+    isLogin: true,
+    element: <UpdatePost />,
   },
 ];

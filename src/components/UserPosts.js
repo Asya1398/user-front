@@ -9,6 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { createStyles, makeStyles } from '@mui/styles';
+import { useHistory } from '../BrowserRouter';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -24,7 +25,7 @@ const useStyles = makeStyles(() =>
 const UserPosts = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
-
+  const history = useHistory();
   const { userPosts, getPostErrorMessages } = useSelector(
     (store) => store.post
   );
@@ -62,7 +63,14 @@ const UserPosts = () => {
                     >
                       Delete
                     </Button>
-                    <Button size="small">Update</Button>
+                    <Button
+                      onClick={() => {
+                        history.push(`/update/${post.id}`);
+                      }}
+                      size="small"
+                    >
+                      Update
+                    </Button>
                   </CardActions>
                 </Card>
               </Grid>
