@@ -19,7 +19,11 @@ export const createPostFailure = createAction('CREATE_POST_FAILURE');
 export const deletePostRequest = createAction('DELETE_POST_REQUEST');
 export const deletePostSuccess = createAction('DELETE_POST_SUCCESS');
 export const deletePostFailure = createAction('DELETE_POST_FAILURE');
-//Get post
+//Get post for updating
 export const getPostRequest = createAction('GET_POST_REQUEST');
 export const getPostSuccess = createAction('GET_POST_SUCCESS');
 export const getPostFailure = createAction('GET_POST_FAILURE');
+//Update post
+export const updatePostRequest = createAction('UPDATE_POST_REQUEST');
+export const updatePostSuccess = createAction('UPDATE_POST_SUCCESS');
+export const updatePostFailure = createAction('UPDATE_POST_FAILURE');
