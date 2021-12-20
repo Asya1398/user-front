@@ -9,7 +9,7 @@ import { useHistory } from '../BrowserRouter';
 import { useDispatch, useSelector } from 'react-redux';
 import usePrevious from '../hooks/usePrevious';
 import { useEffect } from 'react';
-import { getPostRequest } from '../redux/post';
+import { getPostRequest, updatePostRequest } from '../redux/post';
 import { useParams } from 'react-router-dom';
 
 const SignInSchema = Yup.object().shape({
@@ -44,7 +44,6 @@ const ManagePost = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { getPost } = useSelector((store) => store.post);
-
   const { id } = useParams();
 
   useEffect(() => {
@@ -52,6 +51,7 @@ const ManagePost = () => {
   }, []);
 
   const prevIsRegisterSuccess = usePrevious(getPost);
+
   useEffect(() => {
     if (getPost && prevIsRegisterSuccess === false) {
       history.push('/posts');
@@ -63,11 +63,15 @@ const ManagePost = () => {
       title: getPost.title,
       description: getPost.description,
     },
+    enableReinitialize: true,
     validationSchema: SignInSchema,
     onSubmit: (values) => {
-      dispatch(getPostRequest(values));
+      window.location = '/posts';
+      values.id = id;
+      dispatch(updatePostRequest(values));
     },
   });
+
   return (
     <Container>
       <Typography
@@ -90,7 +94,6 @@ const ManagePost = () => {
           className={classes.field}
           name="title"
           value={formik.values.title}
-          label="Title"
           variant="outlined"
           color="secondary"
           fullWidth
@@ -104,7 +107,6 @@ const ManagePost = () => {
           className={classes.field}
           name="description"
           value={formik.values.description}
-          label="Description"
           variant="outlined"
           color="secondary"
           fullWidth

@@ -19,6 +19,9 @@ import {
   getPostRequest,
   getPostSuccess,
   getPostFailure,
+  updatePostRequest,
+  updatePostSuccess,
+  updatePostFailure,
 } from './actions';
 
 const URL = `${config.API_URL}/post`;
@@ -103,7 +106,20 @@ function* getPost({ payload }) {
     }
   }
 }
-
+function* updatePost({ payload }) {
+  try {
+    const response = yield call(() => {
+      axiosApiInstance.put(`${URL}/update/${payload.id}`, payload);
+    });
+    if (response?.status === 200) {
+      yield put(updatePostSuccess(response.data.post));
+    }
+  } catch (e) {
+    if (e?.response?.data) {
+      yield put(updatePostFailure(e?.response?.data));
+    }
+  }
+}
 export default function* () {
   yield takeLatest(getUserPostsRequest, getUserPosts);
   yield takeLatest(getAllUsersRequest, getAllUsers);
@@ -111,4 +127,5 @@ export default function* () {
   yield takeLatest(createPostRequest, createPost);
   yield takeLatest(deletePostRequest, deletePost);
   yield takeLatest(getPostRequest, getPost);
+  yield takeLatest(updatePostRequest, updatePost);
 }

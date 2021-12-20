@@ -15,6 +15,9 @@ import {
   getPostRequest,
   getPostSuccess,
   getPostFailure,
+  updatePostRequest,
+  updatePostSuccess,
+  updatePostFailure,
   getAllUsersRequest,
   getAllUsersSuccess,
   getAllUsersFailure,
@@ -27,18 +30,21 @@ const initialState = {
   isCreatePostSuccess: false,
   isDeletePostSuccess: false,
   isGetThePostSuccess: false,
+  isUpdatedPostSuccess: false,
   userPosts: [],
   allPosts: [],
   allUsers: [],
   createPost: {},
   deletePost: [],
   getPost: {},
+  updatePost: {},
   getPostErrorMessages: [],
   getAllPostsErrorMessages: [],
   getAllUsersErrorMessages: [],
   createPostErrorMessages: [],
   deletePostErrorMessages: [],
   getThePostErrorMessages: [],
+  updatePostErrorMessages: [],
 };
 
 const reducer = handleActions(
@@ -134,7 +140,7 @@ const reducer = handleActions(
       isDeletePostSuccess: false,
       deletePostErrorMessages: payload,
     }),
-    //Update user post
+    //Get  post for updating
     [getPostRequest]: (state) => ({
       ...state,
       isGetThePostSuccess: false,
@@ -142,12 +148,36 @@ const reducer = handleActions(
     }),
     [getPostSuccess]: (state, { payload }) => ({
       ...state,
+      isGetThePostSuccess: true,
       getPost: payload,
     }),
     [getPostFailure]: (state, { payload }) => ({
       ...state,
       isGetThePostSuccess: false,
       getThePostErrorMessages: payload,
+    }),
+    //Update  post
+    [updatePostRequest]: (state) => ({
+      ...state,
+      isUpdatedPostSuccess: false,
+      updatePostErrorMessages: [],
+    }),
+    [updatePostSuccess]: (state, { payload }) => {
+      return {
+        ...state.userPosts.map((post) => {
+          if (post.id === payload) {
+            post = payload;
+            return post;
+          }
+        }),
+        isUpdatedPostSuccess: true,
+        updatePost: payload,
+      };
+    },
+    [updatePostFailure]: (state, { payload }) => ({
+      ...state,
+      isUpdatedPostSuccess: false,
+      updatePostErrorMessages: payload,
     }),
   },
   initialState
