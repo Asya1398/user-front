@@ -42,15 +42,19 @@ const ManagePost = () => {
   const classes = useStyle();
   const history = useHistory();
   const dispatch = useDispatch();
+
   const { isCreatePostSuccess, createPostErrorMessages } = useSelector(
     (store) => store.post
   );
+
   const prevIsRegisterSuccess = usePrevious(isCreatePostSuccess);
+
   useEffect(() => {
     if (isCreatePostSuccess && prevIsRegisterSuccess === false) {
       history.push('/posts');
     }
   }, [isCreatePostSuccess]);
+
   const formik = useFormik({
     initialValues: {
       title: '',
@@ -61,6 +65,7 @@ const ManagePost = () => {
       dispatch(createPostRequest(values));
     },
   });
+
   return (
     <Container>
       <Typography
